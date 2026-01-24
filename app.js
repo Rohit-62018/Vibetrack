@@ -12,6 +12,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const getRoutes = require('./routes/get.js')
 const postRoutes = require('./routes/post.js');
+const { CLOUD_DB, SECRET } = require('./connect');
 
 
 const app = express();
@@ -23,15 +24,15 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const Url = process.env.CLOUD_DB;
-mongoose.connect('mongodb://127.0.0.1:27017/Spotify')
+const Url = CLOUD_DB;
+mongoose.connect(Url)
     .then(() => console.log("Connected to MongoDB"))
     .catch((e) => console.error("MongoDB connection error:", e));
 
 const storage =  MongoStore.create({
     mongoUrl: Url,
     crypto:{
-        secret:process.env.SECRET
+        secret:SECRET
     },
     touchAfter:24*3600
  })
@@ -42,7 +43,7 @@ const storage =  MongoStore.create({
  
 const sessionOption = {
     store: storage,
-    secret:process.env.SECRET ,
+    secret:SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -72,7 +73,6 @@ app.use((req, res, next) => {
 
 
 app.get('/', (req, res) => {
-    console.log("lksdfnlkjsdfnklsjdndf");
     res.redirect('/api');
 });
 
