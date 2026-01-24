@@ -52,6 +52,23 @@
   transition: transform 0.1s ease;
 }
 
+.loader {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #3b82f6,
+    #9333ea,
+    #3b82f6
+  );
+  animation: spin 1s linear infinite;
+  mask: radial-gradient(farthest-side, transparent 60%, #000 61%);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .controler i:hover{
    transform: scale(1.03);
    opacity: 1;

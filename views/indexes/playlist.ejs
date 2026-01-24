@@ -9,10 +9,11 @@
                 </div>
               </div>
             <div class="playlist-box">
+              <% let index = 1; %>
           <% if (songData && songData.playlist.length > 0) { %>
                 <% songData.playlist.forEach(song => { %>
                   <div class="individual-song" draggable="true" data-image='<%-song.image%>' data-url='<%-song.url%>'
-                     data-album='<%-song.album%>' data-name='<%-song.name%>' data-id="<%-song._id%>">
+                     data-album='<%-song.album%>' data-name='<%-song.name%>' data-idx ="<%= index++ %>" >
                     <div class="playlist-img"><img src='<%=song.image%>' alt=""></div>
                     <div class="sond-info">
                       <div><p id="greenName-Green"><%= song.name %></p></div>

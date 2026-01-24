@@ -7,7 +7,7 @@ const emailInput = document.getElementById('email');
         .then(res => res.json())
         .then(data => {
          const feetback = document.querySelector('.invalid');
-         feetback.textContent = data.available ? "" :" Username already taken"  // { available: true } or { available: false }
+         feetback.textContent = data.available ? "" :" Username already taken"  
          feetback.style.color = data.available? "green" :"red"
          if(!data.available){
             const button = document.getElementById('signup-Btn');

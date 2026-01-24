@@ -1,4 +1,3 @@
-
 const audio = document.getElementById('audio');
 const playbtn = document.querySelector('.playBtn');
 const footerImg = document.getElementById('footerImg');
@@ -15,12 +14,23 @@ if(!audio.src){
     footerMusic.style.pointerEvents = 'none';
 }
 
+function updateIcon(){
+    if (audio.paused) {
+        playbtn.classList.remove('fa-circle-pause');
+    } else {
+        playbtn.classList.add('fa-circle-pause')
+    }
+}
 
+audio.addEventListener('play', updateIcon);
+audio.addEventListener('pause', updateIcon); 
 
 async function audioPlayer(song){
     try{
         audio.pause();
         audio.currentTime = 0;
+        playbtn.style.display = 'none';
+        document.getElementById('songLoading').classList.add('loader');
         audio.src = song.url;
         audio.load();
         footerMusic.style.pointerEvents = 'auto';
@@ -48,55 +58,40 @@ async function audioPlayer(song){
             progressBar.addEventListener('input',()=>{
             audio.currentTime = progressBar.value;
         })
-
-        function updateIcon(){
-            if (audio.paused) {
-                playbtn.classList.remove('fa-circle-pause');
-            } else {
-                playbtn.classList.add('fa-circle-pause')
-            }
-        }
         
-        // Auto-play the song 
-        audio.play()
-            .then(()=>{
-                playbtn.classList.add('fa-circle-pause');
-                document.querySelector('.player').style.opacity = 1;
-        })
-        .catch(err=>{
-            console.error("Auto play failed",err.message);
-        })
-        audio.addEventListener('play', updateIcon);
-        audio.addEventListener('pause', updateIcon); 
+        await audio.play();
+        document.getElementById('songLoading').classList.remove('loader');
+        playbtn.style.display = 'block';
+        document.querySelector('.player').style.opacity = 1;
+        updateIcon();
+        
     }
     catch (err) {
         console.error("Play error:", err.message);
-    }
-
-    // Play/Pause toggle  
-    playbtn.onclick = () => {
-        if (audio.paused) {
-            audio.play();
-            playbtn.classList.add('fa-circle-pause');
-        } else {
-            audio.pause();
-            playbtn.classList.remove('fa-circle-pause');
-        }
-    }; 
-        
+    }     
 }
+
+// Play/Pause toggle  
+playbtn.onclick = () => {
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+};
+    
 volume.addEventListener('change', () => {
     volumeIcon.style.opacity = 0.5;
 });
+
 volume.addEventListener('input', () => {
     audio.volume = volume.value;
     document.getElementById('volumeIcon').style.opacity = 1;
 });
+
 // 00:00 Time
 function formatTime(seconds) {
     let min = Math.floor(seconds / 60);
     let sec = Math.floor(seconds % 60);
     return `${min}:${sec < 10 ? '0' + sec : sec}`;
 }
-
-

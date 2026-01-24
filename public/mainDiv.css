@@ -32,8 +32,8 @@
     overflow-x: scroll;
     -ms-overflow-style: none;    /*IE and Edge */
     scroll-behavior: smooth;
-   /* scrollbar-width: none;   fire fox*/
-   /* overscroll-behavior-x: contain; */
+    scrollbar-width: none;   
+    overscroll-behavior-x: contain; 
    overscroll-behavior-y:auto;
 }
 
@@ -86,10 +86,9 @@
     height: max-content;
     display: flex;
     overflow-x: scroll;
-    -ms-overflow-style: none;    /*IE and Edge */
+    -ms-overflow-style: none;   
     scroll-behavior: smooth;
-    scrollbar-width: none;    /*fire fox */
-   /* overscroll-behavior-x: contain; */
+    scrollbar-width: none;    
    overscroll-behavior-y:auto;
 }
 .artistcard{

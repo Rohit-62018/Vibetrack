@@ -65,6 +65,7 @@ function songObjreceiver(){
                         audioPlayer(songData);
                         SongList = container.innerHTML; 
                         currentIdx = songData.idx;
+                        songList = MainContentSongsList;
                         highlightCurrentSong(songData.idx);  
                     }else{
                         flashMsg.textContent = 'You must login';

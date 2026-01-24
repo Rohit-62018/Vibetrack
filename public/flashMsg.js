@@ -22,14 +22,6 @@ function view(){
       }, 3000);
   }
 
-  // search bar hover border focus
-  let box = document.querySelector('.box');
-  document.addEventListener('click',(e)=>{
-    if(!e.target.closest('.box')){
-        box.classList.remove('focus');
-    }else{
-      box.classList.add('focus');
-    }
-  })
+ 
   
   

@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const Url = process.env.CLOUD_DB;
-mongoose.connect(Url)
+mongoose.connect('mongodb://127.0.0.1:27017/Spotify')
     .then(() => console.log("Connected to MongoDB"))
     .catch((e) => console.error("MongoDB connection error:", e));
 
@@ -37,7 +37,7 @@ const storage =  MongoStore.create({
  })
 
  storage.on('error',(err)=>{
-    console.log('Error in MOngosh session',err.message);
+    console.log('Error in Mongosh session',err.message);
  })
  
 const sessionOption = {
@@ -72,6 +72,7 @@ app.use((req, res, next) => {
 
 
 app.get('/', (req, res) => {
+    console.log("lksdfnlkjsdfnklsjdndf");
     res.redirect('/api');
 });
 
@@ -83,7 +84,7 @@ app.use('/api', postRoutes);
 app.use((err, req, res, next) => {
     const status = err.status || 500;
     const message = err.message || 'Something went wrong';
-    req.flash('error',`${message}`)
+    // res.flash('error',`${message}`)
     res.status(status).redirect('/api');
 });
 

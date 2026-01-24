@@ -1,64 +1,83 @@
 .list{
     overflow: hidden;
 }
+
+.headList{
+    display: flex;
+    align-items: center;
+}
+
 .headList img{
    width: 16vw;
    margin: 1.6rem;
    border-radius: 10px;
    box-shadow:10px 10px 55px 4px rgba(0, 0, 0, 0.651);
 }
+
 p{
     margin: 0;
 }
+
 .info{
     display: flex;
-    margin: 2rem 0 0 5rem;
+    margin: 2rem 0 0 4rem;
     color: white;
     opacity: 0.5;
-    
 }
+
+.titles{
+    display: flex;
+    gap: 2.7rem;
+}
+
 .album{
-    margin-left: 17rem;
+    margin-left: 16.5rem;
     min-width: 260px;
     width: 260px;
 }
+
 .duration-title{
-    margin-left: 3.7rem;
+    margin-left: 3.2rem;
 }
+
 .add-Title{
     margin-left:15rem;
 }
 
 .songDiv{
-    margin: 0 3rem 0 3rem;
-    min-width: 21cm;
+    margin: 0 1.8rem 0 1.8rem;
     overflow: hidden;
     display: flex;
     align-items: center;
     border-radius: 4px;
     padding: 0.4rem 0 0.4rem 0 ;
 }
+
 .songDiv:hover{
     background-color: rgba(46, 45, 45, 0.734);
 }
-.count
-{   color: white;
+
+.count{   
+    color: white;
     margin: 0 1.6rem 0 1.7rem;
     opacity: 0.8;
     width: 20px;
     text-align: center;
 }
+
 .songDiv img{
     width: 3rem;
     height: 3rem;
     border-radius: 5px;
     
 }
+
 .imageDiv{
     display: flex;
     align-items: center;
     color: white;
 }
+
 .Info{
     margin-left: 1rem;
     font-weight: 200;
@@ -76,6 +95,7 @@ p{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .albumDiv {
     width: 260px;
     min-width: 260px;
@@ -92,10 +112,12 @@ p{
     width: 100%;
     display: block;
 }
+
 .duration{
     margin-left: 3.2rem;
     color:white;
 }
+
 .add-icon{
     margin-left:14.4rem;
     color: white;
@@ -103,6 +125,7 @@ p{
     border-radius: 80%;
     z-index: 2;
 }
+
 .delete{
     margin: 1rem 0.4rem 0 0 ;
     opacity: 0.8;

@@ -13,7 +13,6 @@ function addSong(){
         }
         addsongInPlayList(songData);
         icon.style.border ='1px solid #43e326';
-        // addNewelement(songData);
     })
 })
 }

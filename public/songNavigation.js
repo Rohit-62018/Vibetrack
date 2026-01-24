@@ -24,35 +24,43 @@ function PreviousSong(){
     }
 };
 
+function highlightCurrentSong(idx) {
 
-function extractSongsData(){
-    const songElements = document.querySelectorAll('.songDiv');
-        const songDataList = Array.from(songElements).map(el => ({
-            name: el.dataset.name,
-            album: el.dataset.album,
-            url: el.dataset.url,
-            image: el.dataset.image,
-            idx: el.dataset.idx
-        }));
-        songList = songDataList;
-}
-
-function highlightCurrentSong(idx){
-
-    document.querySelectorAll('.nameGreen').forEach( h5=>{
-        h5.style.color = "white";
-    })
-     document.querySelectorAll('#greenName-Green').forEach( name=>{
-        name.style.color = "white";
-    })
+    let h5;
+    let matchedSongDiv;
     
-    const matchedSongDiv = Array.from(document.querySelectorAll('.songDiv')).find(div=>
-        div.dataset.idx == idx
-    )
+    document.querySelectorAll('.nameGreen, #greenName-Green').forEach(el => {
+        el.style.color = "white";
+    });
 
-    if(matchedSongDiv){
-        h5 = matchedSongDiv.querySelector('.nameGreen');
+    if (songList !== MainContentSongsList) {
+        matchedSongDiv = Array.from(
+            document.querySelectorAll('.individual-song')
+        ).find(div => div.dataset.idx == idx);
+
+        if (matchedSongDiv) {
+            h5 = matchedSongDiv.querySelector('#greenName-Green');
+        } 
+    } else {
+        matchedSongDiv = Array.from(
+            document.querySelectorAll('.songDiv')
+        ).find(div => div.dataset.idx == idx);
+
+        if (matchedSongDiv) {
+            h5 = matchedSongDiv.querySelector('.nameGreen');
+        }
+    }
+
+    if (h5) {
         h5.style.color = '#43e326';
     }
-    
 }
+
+//  document.querySelectorAll('.nameGreen').forEach( h5=>{
+//             h5.style.color = "white";
+//         })
+//         document.querySelectorAll('#greenName-Green').forEach(name=>{
+//             name.style.color = "white";
+//         })
+
+//         song.querySelector('#greenName-Green').style.color ='#43e326';

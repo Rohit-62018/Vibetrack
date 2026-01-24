@@ -2,13 +2,12 @@
     <div  class="headList">
 
       <img id="Img" src="<%= Url %>" crossorigin="anonymous">
-      <div class="Title"></div>
-     
+      
     </div>
 
     <div class="info ">
       <div class="titles">
-        <p># &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title</p>
+        <p>#</p><p>Title</p>
       </div>
       <div class="album">
         <p>Album</p>  
@@ -21,23 +20,23 @@
       </div>
     </div>
 
-<hr style="color: white; opacity: 0.2; margin: 0 30px 0 30px;" >
+<hr style="color: white; opacity: 0.2; margin: 0 30px 20px 30px;" >
     <% let index = 1; %>
     <% for(song of songs) {%>
-      <div class="songDiv" data-name='<%- song.name %>' data-album='<%- song.album.name %>' data-url='<%-song.downloadUrl[4].url%>'
-        data-image='<%- song.image[2].url %>' data-idx ="<%=index%>" >
+      <div class="songDiv" data-name='<%- song.name %>' data-album='<%- song.album %>' data-url='<%-song.audio %>'
+        data-image='<%- song.image %>' data-idx ="<%= index %>" >
         <div class="count"> <%= index++ %></div>
         <div class="imageDiv">
-          <img src="<%= song.image[2].url%>" loading="lazy" >
+          <img src="<%= song.image%>" loading="lazy" >
           <div class="Info">
-            <h5 style="margin-bottom:0;" class="nameGreen"><%= song.name%></h5>
+            <h5 style="margin-bottom:0;" class="nameGreen"><%= song.name %></h5>
             <p style="opacity: 0.7;">
-             <%= song.artists.primary.map(a => a.name).join(", ") %>
+             <%= song.artists %>
             </p>
           </div>
         </div>
         <div class="albumDiv">
-            <p ><%= song.album.name %></p>
+            <p ><%= song.album %></p>
         </div>
         <div class="duration">
           <p class="Duration" data-duration="<%= song.duration %>"> </p>
