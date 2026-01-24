@@ -43,7 +43,7 @@ const storage =  MongoStore.create({
  
 const sessionOption = {
     store: storage,
-    secret:SECRET,
+    secret:SECRET ,
     resave: false,
     saveUninitialized: true,
     cookie: {
