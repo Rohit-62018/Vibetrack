@@ -10,26 +10,6 @@ toggleBtn.addEventListener('click',()=>{
     document.getElementById('trash').classList.toggle('show');
 })
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     if (!window.pageInitialized) {
-//       window.pageInitialized = true;
-//       PlaylsitSongsExtractData(); 
-//     }
-// });
-
-// function PlaylsitSongsExtractData(){
-//     const songElements = document.querySelectorAll('.individual-song');
-//         const SongData = Array.from(songElements).map(el => ({
-//             name: el.dataset.name,
-//             album: el.dataset.album,
-//             url: el.dataset.url,
-//             image: el.dataset.image,
-//             idx: el.dataset.idx
-//         }));
-//         playlistSongData = SongData;
-// }
-
-
 
 // playlist song click event to play song
 document.addEventListener('DOMContentLoaded',()=>{
@@ -51,13 +31,3 @@ document.addEventListener('DOMContentLoaded',()=>{
         highlightCurrentSong(currentIdx);
     })
 })
-
-
-//  document.querySelectorAll('.nameGreen').forEach( h5=>{
-//             h5.style.color = "white";
-//         })
-//         document.querySelectorAll('#greenName-Green').forEach(name=>{
-//             name.style.color = "white";
-//         })
-
-//         song.querySelector('#greenName-Green').style.color ='#43e326';

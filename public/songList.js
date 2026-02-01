@@ -1,11 +1,18 @@
 const container = document.getElementById('content');  
+const loadingIndicator = document.querySelector('.nav');
 let SongList;
 
 async function loadSongs(songName,url){
+        loadingIndicator.classList.add('active');
         const encodeSongName = encodeURIComponent(songName);
         const encodeurl = encodeURIComponent(url);
-        const response = await axios.get(`/api/music?q=${encodeSongName}&Url=${encodeurl}`) 
-        contentInject(response.data);
+        await axios.get(`/api/music?q=${encodeSongName}&Url=${encodeurl}`)
+            .then(res => {contentInject(res.data);
+                loadingIndicator.classList.remove('active');
+            })
+            .catch(err => {console.error('Fetch error:', err);
+                loadingIndicator.classList.remove('active');
+            }); 
 }
 
 function contentInject(response){ 
