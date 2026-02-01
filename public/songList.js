@@ -69,11 +69,11 @@ function songObjreceiver(){
                 .then(data=>data.json())
                 .then(res =>{
                     if(res.valid){
-                        audioPlayer(songData);
-                        SongList = container.innerHTML; 
+                        audioPlayer(songData); 
                         currentIdx = songData.idx;
                         songList = MainContentSongsList;
                         highlightCurrentSong(songData.idx);  
+                        SongList = container.innerHTML;
                     }else{
                         flashMsg.textContent = 'You must login';
                         view();
