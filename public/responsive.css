@@ -1,0 +1,596 @@
+/* ==========================================================================
+   responsive.css  —  Vibetrack
+   Loaded LAST so it can adapt the existing layout to smaller screens.
+   Rules here only add responsive behaviour: no colors, fonts, icons or
+   features are changed, and nothing is permanently hidden.
+   Desktop (>= 951px) is intentionally left untouched.
+   ========================================================================== */
+
+:root {
+  --vt-nav-h: 62px;
+  --vt-player-h: 70px;
+}
+
+/* ---------- global overflow safety (all sizes) ---------- */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ---------- hamburger button (only rendered/visible on small screens) ---------- */
+.menu-btn {
+  display: none;
+  background-color: rgb(55, 53, 53);
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.drawer-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   Tablets and below — sidebar becomes a slide-in drawer (all features kept)
+   ========================================================================== */
+@media (max-width: 950px) {
+  .menu-btn {
+    display: flex;
+  }
+
+  .nav {
+    padding: 10px 0.6rem 6px;
+    gap: 0.4rem;
+  }
+
+  .nav .image {
+    flex: 0 0 auto;
+  }
+
+  .nav img {
+    margin-left: 0.6rem;
+    height: 2.2rem;
+  }
+
+  .left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .glow-wrap {
+    width: 100%;
+    margin-left: 0.5rem;
+  }
+
+  .left .input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #searchBar {
+    min-width: 0;
+    margin: 0 0.4rem;
+  }
+
+  .right {
+    flex: 0 0 auto;
+    gap: 0.4rem;
+  }
+
+  .login {
+    padding: 0.55rem 1rem;
+    white-space: nowrap;
+  }
+
+  /* the container stops being a two column flex row */
+  .Container {
+    display: block;
+    padding: 0.4rem;
+  }
+
+  /* sidebar: off-canvas drawer, every option still inside it */
+  .side-container {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: min(300px, 86vw) !important;
+    max-width: 86vw;
+    min-width: 0;
+    margin: 0;
+    border-radius: 0 13px 13px 0;
+    z-index: 200;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    padding-bottom: calc(var(--vt-player-h) + 1rem);
+  }
+
+  .side-container.drawer-open {
+    transform: translateX(0);
+  }
+
+  /* keep every sidebar element visible inside the drawer */
+  .side-container h6,
+  .side-container .createPlayList {
+    display: block !important;
+  }
+
+  .side-container .resizer {
+    display: none;
+  }
+
+  .createPlayList {
+    width: calc(100% - 1.2rem);
+    max-height: none;
+  }
+
+  .playlist-box.show {
+    max-height: 60vh;
+  }
+
+  .drawer-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.7rem;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgb(33, 33, 33);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .main-container {
+    width: 100% !important;
+    height: calc(100dvh - var(--vt-nav-h) - var(--vt-player-h) - 0.8rem);
+    border-radius: 13px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+/* only the drawer needs a close button; on desktop it is not rendered */
+@media (min-width: 951px) {
+  .drawer-close {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Song / artist card grids — use the full available width, columns adapt
+   ========================================================================== */
+@media (max-width: 900px) {
+  .main-container .title {
+    margin: 1.4rem 1rem 0.8rem 1rem;
+  }
+
+  .trending,
+  .artist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.2rem;
+    margin: 0 0.5rem;
+    overflow-x: hidden;
+  }
+
+  .card,
+  .artistcard {
+    width: auto;
+    min-width: 0;
+  }
+
+  .card img,
+  .artistcard img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    padding: 0.5rem;
+  }
+
+  .card p,
+  .artistcard p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #song-name,
+  #singer-name {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .trending,
+  .artist {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  #song-name {
+    font-size: 15px;
+  }
+
+  #singer-name {
+    font-size: 13px;
+  }
+}
+
+/* ==========================================================================
+   Song list (list.ejs) — reflow instead of horizontal overflow
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .headList img {
+    width: 40vw;
+    max-width: 200px;
+    margin: 1.2rem;
+  }
+
+  .info {
+    margin: 1.4rem 1rem 0 1rem;
+    align-items: center;
+  }
+
+  .titles {
+    gap: 1.2rem;
+  }
+
+  .album {
+    margin-left: auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .duration-title {
+    margin-left: 1.2rem;
+  }
+
+  .add-Title {
+    margin-left: 1.2rem;
+  }
+
+  .songDiv {
+    margin: 0 0.6rem;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-areas:
+      "count info duration add"
+      ". album album album";
+    align-items: center;
+    column-gap: 0.4rem;
+    padding: 0.5rem 0.2rem;
+  }
+
+  .songDiv .count {
+    grid-area: count;
+    margin: 0 0.4rem;
+  }
+
+  .songDiv .imageDiv {
+    grid-area: info;
+    min-width: 0;
+  }
+
+  .songDiv .albumDiv {
+    grid-area: album;
+    width: auto;
+    min-width: 0;
+    font-size: 13px;
+    opacity: 0.7;
+    padding-left: 4rem;
+  }
+
+  .songDiv .duration {
+    grid-area: duration;
+    margin-left: 0.4rem;
+  }
+
+  .songDiv .add-icon {
+    grid-area: add;
+    margin-left: 0.2rem;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Info {
+    width: auto;
+    min-width: 0;
+    margin-left: 0.8rem;
+  }
+
+  .Info p,
+  .Info h5 {
+    width: 100%;
+  }
+}
+
+/* the "Album" column label has no column of its own once the album text
+   moves onto its own line, so the label is dropped (the album text itself
+   stays visible for every song) */
+@media (max-width: 700px) {
+  .album {
+    display: none;
+  }
+
+  .duration-title {
+    margin-left: auto;
+  }
+
+  .songDiv .albumDiv {
+    padding-left: 3.6rem;
+  }
+}
+
+/* ==========================================================================
+   Bottom player — bigger touch targets, nothing hidden
+   ========================================================================== */
+@media (max-width: 964px) {
+  /* keep the volume control available (it used to be display:none) */
+  .third {
+    display: flex !important;
+  }
+
+  .player {
+    width: auto !important;
+    flex: 1;
+  }
+}
+
+@media (max-width: 950px) {
+  :root {
+    --vt-player-h: 140px;
+  }
+
+  .footer {
+    height: auto;
+    min-height: var(--vt-player-h);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "info volume"
+      "player player";
+    align-items: center;
+    row-gap: 0.2rem;
+    padding: 0.5rem 0.8rem calc(0.5rem + env(safe-area-inset-bottom));
+  }
+
+  .footer .first {
+    grid-area: info;
+    display: flex !important;
+    min-width: 0;
+  }
+
+  .footer .first img {
+    width: 44px;
+  }
+
+  .c p {
+    max-width: 46vw;
+    margin-left: 0.7rem;
+  }
+
+  .footer .third {
+    grid-area: volume;
+    height: auto;
+    flex: 0 0 auto;
+  }
+
+  .footer .third div {
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .footer .third i {
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .footer .third input {
+    width: 84px;
+  }
+
+  .footer .player {
+    grid-area: player;
+    width: 100% !important;
+  }
+
+  .controler {
+    gap: 0.4rem;
+  }
+
+  .controler i {
+    margin: 0;
+    font-size: 26px;
+    min-width: 48px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* the play button keeps its own wrapper sizing */
+  .controler > div {
+    width: 52px !important;
+    height: 48px !important;
+  }
+
+  .controler .playBtn {
+    font-size: 42px !important;
+    min-width: auto;
+    min-height: auto;
+  }
+
+  .playback-bar {
+    width: 100%;
+    align-items: center;
+  }
+
+  #playback-bar input {
+    width: 100% !important;
+    flex: 1;
+    min-width: 0;
+    height: 24px;
+  }
+
+  .playback-bar span {
+    margin: 0 0.4rem;
+    font-size: 12px;
+    min-width: 2.4rem;
+    text-align: center;
+  }
+
+  .progress-bar::-webkit-slider-thumb {
+    height: 1.15rem;
+    width: 1.15rem;
+    margin-top: -7px;
+  }
+}
+
+/* ==========================================================================
+   Site footer content links
+   ========================================================================== */
+@media (max-width: 900px) {
+  .footerContent {
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    padding: 24px 1rem;
+  }
+
+  .footer-bottom {
+    padding: 16px 1rem;
+    gap: 0.6rem;
+    margin-bottom: calc(var(--vt-player-h) + 1rem);
+  }
+
+  .footer-bottom a {
+    display: inline-block;
+    margin-bottom: 0.3rem;
+  }
+
+  .social-icons {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .footerContent {
+    gap: 1.2rem;
+  }
+
+  .footer-section {
+    width: 45%;
+  }
+}
+
+/* ==========================================================================
+   Modals / flash messages
+   ========================================================================== */
+@media (max-width: 550px) {
+  .modal {
+    width: calc(100% - 1.5rem);
+    max-width: 25rem;
+    height: auto;
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
+
+  .login-box {
+    height: auto;
+    padding: 2.5rem 0.5rem 2rem;
+  }
+
+  .remove-btn {
+    left: auto;
+    right: 4%;
+  }
+
+  .flash,
+  .flash-message {
+    padding: 12px 1rem;
+    width: calc(100% - 2rem);
+    max-width: 24rem;
+    text-align: center;
+  }
+}
+
+/* ---------- narrow phones: search bar moves to its own full width row ---------- */
+@media (max-width: 600px) {
+  .nav {
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+
+  .nav .image {
+    order: 1;
+  }
+
+  .nav .right {
+    order: 2;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .nav .left {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .nav .glow-wrap {
+    width: 100%;
+    margin-left: 0.5rem;
+  }
+
+  :root {
+    --vt-nav-h: 118px;
+  }
+}
+
+/* nothing should be clipped on mid-size screens either */
+@media (max-width: 1280px) {
+  .main-container .list {
+    overflow-x: auto;
+  }
+}

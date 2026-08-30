@@ -1,0 +1,50 @@
+<div  class="list">
+    <div  class="headList">
+
+      <img id="Img" src="<%= Url %>" crossorigin="anonymous">
+      
+    </div>
+
+    <div class="info ">
+      <div class="titles">
+        <p>#</p><p>Title</p>
+      </div>
+      <div class="album">
+        <p>Album</p>  
+      </div>
+      <div class="duration-title">
+        <p><i class="fa-solid fa-clock"></i></p>  
+      </div>
+      <div class="add-Title">
+        <p>Add</p>  
+      </div>
+    </div>
+
+<hr style="color: white; opacity: 0.2; margin: 0 30px 20px 30px;" >
+    <% let index = 1; %>
+    <% for(song of songs) {%>
+      <div class="songDiv" data-name='<%- song.name %>' data-album='<%- song.album %>' data-url='<%-song.audio %>'
+        data-image='<%- song.image %>' data-idx ="<%= index %>" >
+        <div class="count"> <%= index++ %></div>
+        <div class="imageDiv">
+          <img src="<%= song.image%>" loading="lazy" >
+          <div class="Info">
+            <h5 style="margin-bottom:0;" class="nameGreen"><%= song.name %></h5>
+            <p style="opacity: 0.7;">
+             <%= song.artists %>
+            </p>
+          </div>
+        </div>
+        <div class="albumDiv">
+            <p ><%= song.album %></p>
+        </div>
+        <div class="duration">
+          <p class="Duration" data-duration="<%= song.duration %>"> </p>
+        </div>  
+        <div class="add-icon">
+            <i class="fa-solid fa-plus"></i>
+        </div>      
+      </div>
+    <%}%>
+</div>
+<%- include('./footerContent.ejs') %>

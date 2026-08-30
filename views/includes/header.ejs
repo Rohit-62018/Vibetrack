@@ -1,0 +1,39 @@
+
+<div class="nav blur" >
+        <!-- Mobile menu button: opens the sidebar drawer on small screens -->
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="image"><img src="Logo/whiticon.png" alt=""></div>
+        <div class="left">
+            <div class="home-icon home">
+                    <i class="fa-solid fa-house"></i>
+                    <div class="tooltip-text">Home</div>
+            </div>
+        <div class="glow-wrap">
+            <div class="input box">
+                <i class="fa-solid search fa-magnifying-glass"></i>
+                <input id="searchBar" type="text" placeholder="What you want to play?" name="input">
+                <i class="fa-solid browser fa-window-restore"></i>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="premium">
+            <a href="#"> <p>Premium</p></a>
+            <a href="#"><p>Support</p></a>
+            <a href="#"><p>Download</p></a>
+        </div>
+        <div class="install">
+            <a href="#"><i class="fa-solid fa-circle-arrow-down"></i>
+            install App</a>
+        </div>
+        <% if(!currUser) {%>
+            <div class="signup" id="signup-btn">Sign-up</div>
+            <div class="login" id="login-btn">Login</div>
+        <% } %>
+        <% if(currUser) {%>
+            <a href="/api/logout" ><div id="logoutBtn"  class="login" >Logout</div></a>
+        <% } %>
+       
+    </div>
+</div>
+
